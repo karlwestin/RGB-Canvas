@@ -38,13 +38,14 @@
          setTimeout(function() {
 	       var v = x.transformRGB({
                                 data: x.readPixels(),
-                                r: function(val) { Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2)); },
-                                b: function(val) { Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2)); },
+                                r: function(val) { return this.rcol = val; },
+                                b: function(val) { return this.rcol },
+                                g: function(val) { return this.rcol },
                                 //g: function(v) { return 0; },
                                // b: function(v) { return 0; },
                                 });
          x.ctx.putImageData(v, 0, 0);
-         }, 1000);
+         }, 50);
 	   };
 
  // Iterating functions
