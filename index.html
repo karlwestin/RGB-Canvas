@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)http://karlwestin.com/rgb/ -->
+<html lang="en" class="no-js"><!--<![endif]--><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" href="http://karlwestin.com/favicon.ico">
+	<link rel="apple-touch-icon" href="http://karlwestin.com/apple-touch-icon.png">
+	<link rel="stylesheet" href="http://karlwestin.com/rgb/css/style.css?v=2">
+
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+  <div id="element">
+
+
+  <canvas width="700" height="555"></canvas></div>
+  
+	<script src="./script.js"></script>
+	
+	<script>
+
+     function calcOffset(offset) {
+        return Math.round(sineWave(offset) * 50);
+     }
+
+	   window.onload = function() {
+         var can = document.createElement("canvas");
+	       can.width = 700;
+	       can.height = 555;
+	       document.getElementById("element").appendChild(can);
+	       rgbcanvas.init(can, "testimg2.jpg");
+	       
+	       var offset = 270, timeout = 50;
+	       setTimeout(function animate() {
+             offset += 1;
+             var factor = sineWave(offset);
+	           var x = rgbcanvas.transformRGB({
+                                data: rgbcanvas.pixels, 
+                                r: function(v) { return v },
+                                rOffset: calcOffset(offset),
+                                });
+               rgbcanvas.ctx.putImageData(x, 0, 0);
+               setTimeout(animate, timeout);
+	       }, timeout);
+	   }
+  </script>
+
+</body></html>
