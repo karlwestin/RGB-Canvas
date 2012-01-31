@@ -17,6 +17,17 @@ They can also be passed as elements (i think)
     Array.prototype.forEach.call(images, function(img) {
         canvases.push(new RGBCanvas(img));
     }
+    
+Following options are accepted in the transformRGB function:
+
+    r: (function) function for transforming the r-value
+    rOffset: (value) offset of the r-channel in pixels to the left
+    + the same for g and b,
+    data (CanvasPixelArray, not optional): -> Are retrieved with obj.readPixels();
+
+At the moment, even if you just want to do offset, you'll have to pass a transform function (just returning the value) for that color channel
+
+
 
 Effects
 -----
