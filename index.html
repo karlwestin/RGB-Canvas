@@ -22,9 +22,7 @@
 
   <div id="element">
 
-
-  <canvas width="700" height="555"></canvas></div>
-  
+  </div>
 	<script src="./script.js"></script>
 	
 	<script>
@@ -34,25 +32,33 @@
      }
 
 	   window.onload = function() {
-         var can = document.createElement("canvas");
-	       can.width = 700;
-	       can.height = 555;
-	       document.getElementById("element").appendChild(can);
-	       rgbcanvas.init(can, "testimg2.jpg");
-	       
-	       var offset = 270, timeout = 50;
+	       var x = new RGBCanvas("jpeg.jpeg");
+      
+	       var offset = 70, timeout = 50;
 	       setTimeout(function animate() {
              offset += 1;
              var factor = sineWave(offset);
-	           var x = rgbcanvas.transformRGB({
-                                data: rgbcanvas.pixels, 
+	           var v = x.transformRGB({
+                                data: x.readPixels(), 
                                 r: function(v) { return v },
                                 rOffset: calcOffset(offset),
                                 });
-               rgbcanvas.ctx.putImageData(x, 0, 0);
+               x.ctx.putImageData(v, 0, 0);
                setTimeout(animate, timeout);
 	       }, timeout);
-	   }
+	   };
+
+ // Iterating functions
+
+ function sineWave(wavepos) {
+    // returns a value betwwen 0 and 1. "Starts" at 0.5
+    // to start with 0, pass in 90
+    return Math.sin(degToRad(wavepos))/2 + 0.5;
+
+    function degToRad(v) {
+      return Math.round((v * Math.PI/180) * 1000)/1000;
+    }
+ }
   </script>
 
 </body></html>
