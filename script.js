@@ -46,6 +46,7 @@ var RGBCanvas = function(imgEl, el) {
           bOffset:  config.bOffset || 0,
           data:     config.data
         }
+
         
         var newData = ctx.createImageData(700, 555);
         newData.data = config.data;

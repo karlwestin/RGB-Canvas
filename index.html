@@ -34,18 +34,17 @@
 	   window.onload = function() {
 	       var x = new RGBCanvas("jpeg.jpeg");
       
-	       var offset = 70, timeout = 50;
-	       setTimeout(function animate() {
-             offset += 1;
-             var factor = sineWave(offset);
-	           var v = x.transformRGB({
-                                data: x.readPixels(), 
-                                r: function(v) { return v },
-                                rOffset: calcOffset(offset),
+	       var offset = 0, timeout = 2000;
+         setTimeout(function() {
+	       var v = x.transformRGB({
+                                data: x.readPixels(),
+                                r: function(val) { Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2)); },
+                                b: function(val) { Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2)); },
+                                //g: function(v) { return 0; },
+                               // b: function(v) { return 0; },
                                 });
-               x.ctx.putImageData(v, 0, 0);
-               setTimeout(animate, timeout);
-	       }, timeout);
+         x.ctx.putImageData(v, 0, 0);
+         }, 1000);
 	   };
 
  // Iterating functions
@@ -58,7 +57,18 @@
     function degToRad(v) {
       return Math.round((v * Math.PI/180) * 1000)/1000;
     }
- }
+  };
+
+
+  function curve(val) {
+      return Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2));
+      console.log(val);
+  };
+
+  function straight(val) {
+    return val;
+  };
+
   </script>
 
 </body></html>
