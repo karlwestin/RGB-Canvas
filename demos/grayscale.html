@@ -16,9 +16,8 @@
 </head>
 <body>
 
-  <h1>Invert the red channel</h1>
+  <h1>Grayscale image</h1>
   <p>Photo by <a href="http://www.flickr.com/photos/blmiers2/6739112709/">blmiers2</a></p>
-
 	<script src="../rgbcanvas.js"></script>
 	
 	<script>
@@ -30,7 +29,9 @@
          setTimeout(function() {
 	       var v = x.transformRGB({
                                 data: x.readPixels(),
-                                r: function(val) { return this.rcol = 255-val; },
+                                r: function(val) { return this.rcolor = val; },
+                                g: function() { return this.rcolor; },
+                                b: function() { return this.rcolor; },
                                 });
          x.ctx.putImageData(v, 0, 0);
          }, 20);

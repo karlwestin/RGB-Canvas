@@ -16,24 +16,39 @@
 </head>
 <body>
 
-  <h1>Invert the red channel</h1>
+  <h1>Offseting the green color channel</h1>
   <p>Photo by <a href="http://www.flickr.com/photos/blmiers2/6739112709/">blmiers2</a></p>
 
 	<script src="../rgbcanvas.js"></script>
 	
 	<script>
 
+     function calcOffset(offset) {
+        return Math.round(sineWave(offset) * 50);
+     }
+     function sineWave(wavepos) {
+        // returns a value betwwen 0 and 1. "Starts" at 0.5
+        // to start with 0, pass in 90
+        return Math.sin(degToRad(wavepos))/2 + 0.5;
+
+        function degToRad(v) {
+        return Math.round((v * Math.PI/180) * 1000)/1000;
+        }
+     } 
+  
 	   window.onload = function() {
 	       var x = new RGBCanvas("jpeg.jpeg");
       
-	       var offset = 0, timeout = 2000;
-         setTimeout(function() {
+	       var offset = 0, timeout = 50;
+         setTimeout(function animate() {
 	       var v = x.transformRGB({
                                 data: x.readPixels(),
-                                r: function(val) { return this.rcol = 255-val; },
+                                g: function(val) { return val }, // needs to have static function 
+                                gOffset: calcOffset(offset++),
                                 });
          x.ctx.putImageData(v, 0, 0);
-         }, 20);
+         setTimeout(animate, timeout);
+         }, timeout);
 	   };
   </script>
 

@@ -48,7 +48,7 @@ var RGBCanvas = function(imgEl, el) {
         }
 
         
-        var newData = ctx.createImageData(700, 555);
+        var newData = ctx.createImageData(canvas.width, canvas.height);
         newData.data = config.data;
         
         var x = 0;
