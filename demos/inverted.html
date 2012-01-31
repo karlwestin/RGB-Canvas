@@ -10,26 +10,17 @@
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
-	<link rel="shortcut icon" href="http://karlwestin.com/favicon.ico">
-	<link rel="apple-touch-icon" href="http://karlwestin.com/apple-touch-icon.png">
-	<link rel="stylesheet" href="http://karlwestin.com/rgb/css/style.css?v=2">
-
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 </head>
 <body>
 
-  <div id="element">
+  <h1>Invert the red channel</h1>
 
-  </div>
 	<script src="../rgbcanvas.js"></script>
 	
 	<script>
-
-     function calcOffset(offset) {
-        return Math.round(sineWave(offset) * 50);
-     }
 
 	   window.onload = function() {
 	       var x = new RGBCanvas("jpeg.jpeg");
@@ -39,37 +30,10 @@
 	       var v = x.transformRGB({
                                 data: x.readPixels(),
                                 r: function(val) { return this.rcol = 255-val; },
-                                //b: function(val) { return this.rcol },
-                                //g: function(val) { return this.rcol },
-                                //g: function(v) { return 0; },
-                               // b: function(v) { return 0; },
                                 });
          x.ctx.putImageData(v, 0, 0);
-         }, 50);
+         }, 20);
 	   };
-
- // Iterating functions
-
- function sineWave(wavepos) {
-    // returns a value betwwen 0 and 1. "Starts" at 0.5
-    // to start with 0, pass in 90
-    return Math.sin(degToRad(wavepos))/2 + 0.5;
-
-    function degToRad(v) {
-      return Math.round((v * Math.PI/180) * 1000)/1000;
-    }
-  };
-
-
-  function curve(val) {
-      return Math.round(255 * ((Math.sin( ( (val - 125)/125)*Math.PI/2) + 1) / 2));
-      console.log(val);
-  };
-
-  function straight(val) {
-    return val;
-  };
-
   </script>
 
 </body></html>
