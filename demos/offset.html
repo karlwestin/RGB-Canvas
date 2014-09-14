@@ -37,18 +37,16 @@
      } 
   
 	   window.onload = function() {
-	       var x = new RGBCanvas("jpeg.jpeg");
-      
 	       var offset = 0, timeout = 50;
-         setTimeout(function animate() {
-	       var v = x.transformRGB({
-                                data: x.readPixels(),
-                                g: function(val) { return val }, // needs to have static function 
-                                gOffset: calcOffset(offset++),
-                                });
-         x.ctx.putImageData(v, 0, 0);
-         setTimeout(animate, timeout);
-         }, timeout);
+         var x = new RGBCanvas("jpeg.jpeg", null, function animate() {
+            var v = x.transformRGB({
+                                    data: x.readPixels(),
+                                    g: function(val) { return val }, // needs to have static function 
+                                    gOffset: calcOffset(offset++),
+                                    });
+            x.ctx.putImageData(v, 0, 0);
+            setTimeout(animate, timeout);
+         });
 	   };
   </script>
 

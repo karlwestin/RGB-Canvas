@@ -23,18 +23,15 @@
 	<script>
 
 	   window.onload = function() {
-	       var x = new RGBCanvas("jpeg.jpeg");
-      
-	       var offset = 0, timeout = 2000;
-         setTimeout(function() {
-	       var v = x.transformRGB({
-                                data: x.readPixels(),
-                                r: function(val) { return this.rcolor = val; },
-                                g: function() { return this.rcolor; },
-                                b: function() { return this.rcolor; },
-                                });
-         x.ctx.putImageData(v, 0, 0);
-         }, 20);
+	       var x = new RGBCanvas("jpeg.jpeg", null, function() {
+            var v = x.transformRGB({
+                                    data: x.readPixels(),
+                                    r: function(val) { return this.rcolor = val; },
+                                    g: function() { return this.rcolor; },
+                                    b: function() { return this.rcolor; },
+                                    });
+            x.ctx.putImageData(v, 0, 0);
+         });
 	   };
   </script>
 
