@@ -8,9 +8,15 @@ API
 
 Images can be passed as a string  
 
-    var img = new RGBCanvas("image.jpg")  
+    var img = new RGBCanvas("image.jpg", el, callback);
 
-They can also be passed as elements (i think)
+`el` and `callback` are optional
+
+`el` will be the element where the canvas will be appended.
+
+`callback` is called when the image has loaded
+
+Images can also be passed as elements: 
 
     var canvases = [],
         images = document.querySelectorAll("img");
